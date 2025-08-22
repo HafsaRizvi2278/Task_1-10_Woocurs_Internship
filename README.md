@@ -34,6 +34,7 @@ restaurant-menu-app/
 ---
 # TASK_2
 
+## 📌 Deliverables (End of Day 2)
 
 ✅ Database (restaurant_menu_db) created in phpMyAdmin
 ✅ entries table verified
@@ -43,3 +44,19 @@ restaurant-menu-app/
 ✅ GitHub repo updated
 ✅ Google Sheet updated with link
 ✅ Recording uploaded
+
+
+
+
+# TASK_3
+
+
+## 📌 Deliverables (End of Day 3)
+
+✔ view.php displays all entries
+✔ Search/filter functionality
+✔ Table styled with Bootstrap
+✔ Optional pagination
+✔ GitHub repo updated
+✔ Google Sheet updated
+✔ Recording uploaded
