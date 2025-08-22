@@ -1,62 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Form - Restaurant Menu App</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register Entry - Restaurant Menu App</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+  .form-control:invalid { border-color: red; }
+  .form-control:valid { border-color: green; }
+</style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Restaurant Menu App</a>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link active" href="form.html">Form</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Form Section -->
-  <div class="container mt-5">
-    <h2>Add Entry</h2>
-    <form method="POST" action="form.php" onsubmit="return validateForm()">
-      <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input type="text" name="name" id="name" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" name="email" id="email" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Phone</label>
-        <input type="tel" name="phone" id="phone" class="form-control" required>
-      </div>
-      <button type="submit" class="btn btn-success">Submit</button>
-      <button type="reset" class="btn btn-secondary">Clear Form</button>
-    </form>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Restaurant Menu App</a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link active" href="form.html">Form</a></li>
+      <li class="nav-item"><a class="nav-link" href="view.php">View Entries</a></li>
+      <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+      <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+    </ul>
   </div>
+</nav>
 
-  <script>
-    function validateForm() {
-      let name = document.getElementById("name").value.trim();
-      let email = document.getElementById("email").value.trim();
-      let phone = document.getElementById("phone").value.trim();
+<div class="container mt-5">
+  <h2 class="mb-4">Add New Entry</h2>
 
-      if (!name || !email || !phone) {
-        alert("All fields are required!");
-        return false;
-      }
-      return true;
+  <form action="form.php" method="POST" id="entryForm" class="needs-validation" novalidate>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" id="name" name="name" class="form-control" placeholder="Enter name" required>
+      <div class="invalid-feedback">Please enter at least 3 characters.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" name="email" class="form-control" placeholder="Enter email" required>
+      <div class="invalid-feedback">Please enter a valid email address.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter 10-digit phone" required maxlength="10">
+      <div class="invalid-feedback">Please enter a 10-digit phone number.</div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  Developed by Hafsa Rizvi | 2025
+</footer>
+
+<script>
+// Bootstrap form validation
+(() => {
+  const form = document.getElementById('entryForm');
+  form.addEventListener('submit', function(event) {
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      event.stopPropagation();
     }
-  </script>
+    form.classList.add('was-validated');
+  }, false);
+})();
 
-  <!-- Footer -->
-  <footer class="bg-dark text-white text-center py-3 mt-5">
-    Developed by Hafsa Rizvi | 2025
-  </footer>
+// Real-time validation & formatting
+document.getElementById("name").addEventListener("input", function() {
+  this.value = this.value.toUpperCase();
+  if(this.value.length < 3) {
+    this.setCustomValidity("Invalid");
+  } else {
+    this.setCustomValidity("");
+  }
+});
+
+document.getElementById("phone").addEventListener("input", function() {
+  this.value = this.value.replace(/[^0-9]/g,'');
+  if(this.value.length != 10) {
+    this.setCustomValidity("Invalid");
+  } else {
+    this.setCustomValidity("");
+  }
+});
+</script>
 </body>
 </html>
