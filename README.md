@@ -6,7 +6,7 @@ This project was developed as part of an internship task to practice **front-end
 ---
 
 ## 🚀 Live Demo
-👉 [View on GitHub Pages](https://YOUR-USERNAME.github.io/restaurant-menu-app/)
+👉 [View on GitHub Pages]https://hafsarizvi2278.github.io/Task_1-10_Woocurs_Internship/
 
 ---
 
