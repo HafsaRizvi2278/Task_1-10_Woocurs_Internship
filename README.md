@@ -73,3 +73,13 @@ restaurant-menu-app/
 - Delete entries with confirmation (`delete.php`)  
 - Responsive **Navbar** and consistent footer  
 
+
+## 📌 Deliverables (End of Day 5)
+
+- Forms with real-time validation & input masks 
+- Dynamic table sorting & hover highlighting 
+- Bootstrap modals & success alerts implemented 
+- Mobile-responsive UI 
+- GitHub repo updated 
+- Google Sheet updated 
+- Recording link shared 
