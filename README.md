@@ -60,3 +60,16 @@ restaurant-menu-app/
 ✔ GitHub repo updated
 ✔ Google Sheet updated
 ✔ Recording uploaded
+
+
+## 📌 Deliverables (End of Day 4)
+
+- Add new entries via a form (`form.php`)  
+- Server-side validation for Name, Email, Phone  
+- View all entries in a **responsive table** (`view.php`)  
+- **Search/filter** entries by Name or Email  
+- **Pagination** to display entries in batches  
+- Edit existing entries (`update.php`)  
+- Delete entries with confirmation (`delete.php`)  
+- Responsive **Navbar** and consistent footer  
+
