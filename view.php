@@ -1,11 +1,26 @@
 <?php 
 include 'config.php';
 
+// Pagination settings
+$limit = 5; // entries per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
 // Handle search query
 $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Count total entries for pagination
+$count_sql = "SELECT COUNT(*) as total FROM entries 
+              WHERE name LIKE '%$search%' OR email LIKE '%$search%'";
+$count_result = $conn->query($count_sql);
+$total_rows = $count_result->fetch_assoc()['total'];
+$total_pages = ceil($total_rows / $limit);
+
+// Fetch entries for current page
 $sql = "SELECT * FROM entries 
         WHERE name LIKE '%$search%' OR email LIKE '%$search%' 
-        ORDER BY id DESC";
+        ORDER BY id DESC
+        LIMIT $limit OFFSET $offset";
 $result = $conn->query($sql);
 ?>
 
@@ -51,6 +66,7 @@ $result = $conn->query($sql);
           <th>Email</th>
           <th>Phone</th>
           <th>Created At</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -63,14 +79,41 @@ $result = $conn->query($sql);
                     <td>{$row['email']}</td>
                     <td>{$row['phone']}</td>
                     <td>{$row['created_at']}</td>
+                    <td>
+                      <a href='update.php?id={$row['id']}' class='btn btn-primary btn-sm'>Edit</a>
+                      <a href='delete.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure?\");'>Delete</a>
+                    </td>
                   </tr>";
           }
         } else {
-          echo "<tr><td colspan='5' class='text-center'>No entries found</td></tr>";
+          echo "<tr><td colspan='6' class='text-center'>No entries found</td></tr>";
         }
         ?>
       </tbody>
     </table>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <?php if($page > 1): ?>
+          <li class="page-item">
+            <a class="page-link" href="?search=<?= $search ?>&page=<?= $page-1 ?>">Previous</a>
+          </li>
+        <?php endif; ?>
+
+        <?php for($i=1; $i<=$total_pages; $i++): ?>
+          <li class="page-item <?= ($i==$page)?'active':'' ?>">
+            <a class="page-link" href="?search=<?= $search ?>&page=<?= $i ?>"><?= $i ?></a>
+          </li>
+        <?php endfor; ?>
+
+        <?php if($page < $total_pages): ?>
+          <li class="page-item">
+            <a class="page-link" href="?search=<?= $search ?>&page=<?= $page+1 ?>">Next</a>
+          </li>
+        <?php endif; ?>
+      </ul>
+    </nav>
   </div>
 
   <!-- Footer -->
