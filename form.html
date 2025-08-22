@@ -22,18 +22,18 @@
   <!-- Form Section -->
   <div class="container mt-5">
     <h2>Add Entry</h2>
-    <form id="entryForm">
+    <form method="POST" action="form.php" onsubmit="return validateForm()">
       <div class="mb-3">
         <label class="form-label">Name</label>
-        <input type="text" id="name" class="form-control" required>
+        <input type="text" name="name" id="name" class="form-control" required>
       </div>
       <div class="mb-3">
         <label class="form-label">Email</label>
-        <input type="email" id="email" class="form-control" required>
+        <input type="email" name="email" id="email" class="form-control" required>
       </div>
       <div class="mb-3">
         <label class="form-label">Phone</label>
-        <input type="tel" id="phone" class="form-control" required>
+        <input type="tel" name="phone" id="phone" class="form-control" required>
       </div>
       <button type="submit" class="btn btn-success">Submit</button>
       <button type="reset" class="btn btn-secondary">Clear Form</button>
@@ -41,16 +41,17 @@
   </div>
 
   <script>
-    document.getElementById("entryForm").addEventListener("submit", function(event) {
+    function validateForm() {
       let name = document.getElementById("name").value.trim();
       let email = document.getElementById("email").value.trim();
       let phone = document.getElementById("phone").value.trim();
-      
+
       if (!name || !email || !phone) {
         alert("All fields are required!");
-        event.preventDefault();
+        return false;
       }
-    });
+      return true;
+    }
   </script>
 
   <!-- Footer -->
